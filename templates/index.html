@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database</title>
+</head>
+<body>
+    <h1>아이템 목록</h1>
+    <table border="1">
+        <tr>
+            <th>아이템</th>
+            <th>수량</th>
+            <th>위치 (스택, 열, 선반)</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        {% for key, value in items.items() %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value['count'] }}</td>
+            <td>{{ value['location'].stack }}, {{ value['location'].column }}, {{ value['location'].shelf }}</td>
+            <td>
+                <form action="/update" method="get" style="display:inline;">
+                    <input type="hidden" name="key" value="{{ key }}">
+                    <input type="submit" value="수정">
+                </form>
+            </td>
+            <td>
+                <form action="/delete" method="post" style="display:inline;">
+                    <input type="hidden" name="key" value="{{ key }}">
+                    <input type="submit" value="삭제">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/insert">아이템 추가</a>
+    <a href="/find">아이템 찾기</a>
+    <a href="/save">저장</a>
+</body>
+</html>

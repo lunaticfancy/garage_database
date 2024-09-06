@@ -148,7 +148,7 @@ class Database:
     # 프로그램이 종료 되면 database의 모든 데이터를 CSV 파일에 저장하는 함수를 만든다.
     @staticmethod
     def save_database(database):
-        with open("database.csv", "w", newline='') as file:
+        with open("database.csv", "w", newline='', encoding='cp949') as file:
             writer = csv.writer(file)
             writer.writerow(["key", "count", "stack", "column", "shelf"])
             for key, value in database.data.items():
@@ -161,7 +161,7 @@ class Database:
     def load_database():
         database = Database()
         try:
-            with open("database.csv", "r") as file:
+            with open("database.csv", "r", encoding='cp949') as file:
                 reader = csv.DictReader(file)
                 for row in reader:
                     key = row["key"]

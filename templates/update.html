@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아이템 수정</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>아이템 수정</h1>
-    <form method="post">
-        아이템 이름: <input type="text" name="key" value="{{ key }}" readonly><br>
-        아이템 개수: <input type="number" name="value" value="{{ value }}" required><br>
-        아이템 위치: <input type="text" name="location" value="{{ location }}" required>
-        <input type="submit" value="수정">
+    <form action="{{ url_for('update_item') }}" method="post">
+        <input type="text" name="key" value="{{ key }}" readonly>
+        <input type="number" name="value" value="{{ value }}" required>
+        <input type="text" name="location" value="{{ location }}" required>
+        <input type="submit" value="수정" class="button">
     </form>
-    <a href="/">뒤로</a>
+    <a href="{{ url_for('index') }}" class="button">돌아가기</a>
 </body>
 </html>

@@ -1,4 +1,5 @@
 import csv
+import io
 
 # database는 아이템의 이름이 key, 아이템의 개수가 value, 아이템의 위치가 location인 딕셔너리로 구성되어 있다.
 class Location:
@@ -148,20 +149,21 @@ class Database:
     # 프로그램이 종료 되면 database의 모든 데이터를 CSV 파일에 저장하는 함수를 만든다.
     @staticmethod
     def save_database(database):
-        with open("database.csv", "w", newline='', encoding='cp949') as file:
-            writer = csv.writer(file)
-            writer.writerow(["key", "count", "stack", "column", "shelf"])
-            for key, value in database.data.items():
-                location = value['location']
-                writer.writerow([key, value['count'], location.stack, location.column, location.shelf])
-        print("데이터베이스가 성공적으로 저장되었습니다.")
+        output = io.StringIO()
+        writer = csv.writer(output)
+        writer.writerow(["key", "count", "stack", "column", "shelf"])
+        for key, value in database.data.items():
+            location = value['location']
+            writer.writerow([key, value['count'], location.stack, location.column, location.shelf])
+        
+        return output.getvalue()
 
     # 프로그램이 실행 되면 database.csv 파일을 읽어서 database를 초기화하는 함수를 만든다.
     @staticmethod
     def load_database():
         database = Database()
         try:
-            with open("database.csv", "r", encoding='cp949') as file:
+            with open("database.csv", "r", encoding='cp949') as file:  # 'cp949' 인코딩 사용
                 reader = csv.DictReader(file)
                 for row in reader:
                     key = row["key"]

@@ -1,4 +1,6 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, send_file
+import io
+
 from database import Database, Location
 
 app = Flask(__name__)
@@ -86,8 +88,14 @@ def find_item():
 
 @app.route('/save')
 def save_database():
-    Database.save_database(database)
-    return redirect(url_for('index'))
+    csv_data = Database.save_database(database)
+    
+    return send_file(
+        io.BytesIO(csv_data.encode('cp949')),
+        mimetype='text/csv',
+        as_attachment=True,
+        download_name='database.csv'
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

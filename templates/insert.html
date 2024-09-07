@@ -11,7 +11,7 @@
     <form action="{{ url_for('insert_item') }}" method="post">
         <input type="text" name="key" placeholder="아이템 이름" required>
         <input type="number" name="value" placeholder="수량" required>
-        <input type="text" name="location" placeholder="위치 (예: 1,2,3)" required>
+        <input type="text" name="location" placeholder="위치 stack, column, shelf (예: 1,2,3)" required>
         <input type="submit" value="추가" class="button">
     </form>
     <a href="{{ url_for('index') }}" class="button">돌아가기</a>

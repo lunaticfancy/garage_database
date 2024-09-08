@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>아이템 수정</h1>
-    <form action="{{ url_for('update_item') }}" method="post">
+    <form action="{{ url_for('update_item', key=key) }}" method="post">
         <input type="text" name="key" value="{{ key }}" readonly>
         <input type="number" name="value" value="{{ value }}" required>
         <input type="text" name="location" value="{{ location }}" required>

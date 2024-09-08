@@ -15,7 +15,7 @@
             <th>위치</th>
             <th>작업</th>
         </tr>
-        {% for key, item in items.items() %}
+        {% for key, item in database.items() %}
         <tr>
             <td>{{ key }}</td>
             <td>{{ item.count }}</td>
@@ -35,5 +35,6 @@
     <a href="{{ url_for('insert_item') }}" class="button">새 아이템 추가</a>
     <a href="{{ url_for('find_item') }}" class="button">아이템 찾기</a>
     <a href="{{ url_for('save_database') }}" class="button">데이터베이스 저장</a>
+    <a href="{{ url_for('upload_database') }}" class="button">데이터베이스 업로드</a>
 </body>
 </html>
